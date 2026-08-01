@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>A Little Note for You • Happy Friendship Day</title>
+
+  <!-- Google Fonts: Inter & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* --- CSS RESET & RICH DESIGN SYSTEM --- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg-cream: #faf4ee;
+      --bg-warm-light: #fffcf8;
+      --blush-pink: #f8ebe9;
+      --blush-pink-accent: #f4d3d6;
+      --soft-rose: #d9777f;
+      --soft-rose-hover: #c86b73;
+      --deep-rose: #a84b53;
+      --slate-dark: #2c3545;
+      --slate-muted: #566175;
+      --slate-light: #8894a8;
+      
+      --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 250, 246, 0.76) 100%);
+      --glass-border: rgba(255, 255, 255, 0.92);
+      --glass-shadow: 0 24px 54px rgba(217, 119, 127, 0.12), 0 8px 24px rgba(0, 0, 0, 0.03);
+
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --orb-1-color: radial-gradient(circle, #fde2e4 0%, rgba(253, 226, 228, 0) 70%);
+      --orb-2-color: radial-gradient(circle, #fff1e6 0%, rgba(255, 241, 230, 0) 70%);
+      --orb-3-color: radial-gradient(circle, #f0d6e8 0%, rgba(240, 214, 232, 0) 70%);
+    }
+
+    /* THEME PRESETS */
+    body.theme-sunset {
+      --bg-cream: #fef8ed;
+      --blush-pink: #fef3c7;
+      --blush-pink-accent: #fde68a;
+      --soft-rose: #d97706;
+      --deep-rose: #b45309;
+      --orb-1-color: radial-gradient(circle, #fef3c7 0%, rgba(254, 243, 199, 0) 70%);
+      --orb-2-color: radial-gradient(circle, #ffedd5 0%, rgba(255, 237, 213, 0) 70%);
+      --orb-3-color: radial-gradient(circle, #fce7f3 0%, rgba(252, 231, 243, 0) 70%);
+    }
+
+    body.theme-lavender {
+      --bg-cream: #f8f5fc;
+      --blush-pink: #f3e8ff;
+      --blush-pink-accent: #e9d5ff;
+      --soft-rose: #9333ea;
+      --deep-rose: #7e22ce;
+      --orb-1-color: radial-gradient(circle, #f3e8ff 0%, rgba(243, 232, 255, 0) 70%);
+      --orb-2-color: radial-gradient(circle, #fbcfe8 0%, rgba(251, 207, 232, 0) 70%);
+      --orb-3-color: radial-gradient(circle, #e0e7ff 0%, rgba(224, 231, 255, 0) 70%);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f1e8df;
+      font-family: var(--font-sans);
+      color: var(--slate-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.5s ease;
+    }
+
+    /* Interactive Tap Floating Emoji Particles */
+    .tap-particle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 1.25rem;
+      user-select: none;
+      animation: float-tap-particle 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes float-tap-particle {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+      }
+      50% {
+        opacity: 0.9;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy) - 35px)) scale(1.35) rotate(var(--rot));
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy) - 75px)) scale(0.8) rotate(var(--rot));
+      }
+    }
+
+    /* Ambient Floating Mesh Canvas & Glowing Orbs */
+    #ambient-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(65px);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 0;
+      animation: float-orb 14s infinite ease-in-out alternate;
+      transition: background 0.8s ease;
+    }
+
+    .orb-1 {
+      top: 5%;
+      left: 10%;
+      width: 280px;
+      height: 280px;
+      background: var(--orb-1-color);
+    }
+
+    .orb-2 {
+      bottom: 8%;
+      right: 8%;
+      width: 320px;
+      height: 320px;
+      background: var(--orb-2-color);
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      top: 45%;
+      right: 20%;
+      width: 240px;
+      height: 240px;
+      background: var(--orb-3-color);
+      animation-delay: -9s;
+    }
+
+    @keyframes float-orb {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, 40px) scale(1.12); }
+      100% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    /* --- REEL / STORY DECK APP CONTAINER --- */
+    .story-app {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      height: 100dvh;
+      background: radial-gradient(circle at 50% 15%, #ffffff 0%, var(--bg-cream) 75%, #f3ece3 100%);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 28px 65px rgba(0, 0, 0, 0.13);
+      z-index: 1;
+      transition: background 0.5s ease;
+    }
+
+    @media (min-width: 480px) {
+      .story-app {
+        height: 92vh;
+        max-height: 880px;
+        border-radius: 36px;
+        border: 1px solid rgba(255, 255, 255, 0.75);
+      }
+    }
+
+    /* --- TOP PROGRESS BAR & HEADER CONTROLS --- */
+    .top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 16px 12px 16px;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: linear-gradient(to bottom, rgba(250, 244, 238, 0.94) 0%, rgba(250, 244, 238, 0) 100%);
+      backdrop-filter: blur(8px);
+    }
+
+    .progress-container {
+      display: flex;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .progress-segment {
+      flex: 1;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.08);
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      background: linear-gradient(90deg, var(--soft-rose) 0%, var(--deep-rose) 100%);
+      border-radius: 99px;
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 10px rgba(217, 119, 127, 0.5);
+    }
+
+    .top-header-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .story-author-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--slate-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .author-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--blush-pink-accent);
+      color: var(--soft-rose);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      animation: pulse-avatar 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-avatar {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* --- HEADER BUTTONS (MUSIC & THEME) --- */
+    .music-btn, .theme-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--blush-pink-accent);
+      color: var(--slate-dark);
+      font-size: 0.76rem;
+      font-weight: 500;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(217, 119, 127, 0.1);
+      transition: all 0.25s ease;
+    }
+
+    .music-btn:hover, .theme-btn:hover {
+      background: #ffffff;
+      border-color: var(--soft-rose);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(217, 119, 127, 0.2);
+    }
+
+    .music-btn .music-icon {
+      font-size: 13px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .music-btn.playing .music-icon {
+      animation: pulse-music 1.2s infinite ease-in-out alternate;
+    }
+
+    @keyframes pulse-music {
+      0% { transform: scale(1) rotate(-6deg); }
+      100% { transform: scale(1.35) rotate(6deg); }
+    }
+
+    /* --- TAP NAVIGATION ZONES --- */
+    .tap-zone {
+      position: absolute;
+      top: 60px;
+      bottom: 0;
+      width: 35%;
+      z-index: 20;
+      cursor: pointer;
+    }
+
+    .tap-zone.left { left: 0; }
+    .tap-zone.right { right: 0; }
+
+    /* Desktop Navigation Hint Arrows */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      color: var(--slate-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 30;
+      cursor: pointer;
+      opacity: 0.4;
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .story-app:hover .nav-arrow {
+      opacity: 0.85;
+    }
+
+    .nav-arrow:hover {
+      opacity: 1 !important;
+      background: #ffffff;
+      transform: translateY(-50%) scale(1.1);
+      color: var(--soft-rose);
+    }
+
+    .nav-arrow.left-arrow { left: 12px; }
+    .nav-arrow.right-arrow { right: 12px; }
+
+    @media (max-width: 540px) {
+      .nav-arrow { display: none !important; }
+    }
+
+    /* --- SLIDES SLIDER DECK --- */
+    .slides-deck {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 84px 24px 40px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.94) translateY(20px) rotateX(2deg);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  visibility 0.6s;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0) rotateX(0deg);
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    /* --- REUSABLE GLASS CARD & TAG --- */
+    .glass-card {
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(190%);
+      -webkit-backdrop-filter: blur(20px) saturate(190%);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 36px 26px;
+      box-shadow: var(--glass-shadow);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      animation: gentle-card-float 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes gentle-card-float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-4px); }
+    }
+
+    .tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: var(--blush-pink);
+      border: 1px solid var(--blush-pink-accent);
+      color: var(--soft-rose);
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 12px rgba(217, 119, 127, 0.08);
+      animation: tagPulse 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes tagPulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.04); }
+    }
+
+    /* --- EXCLUSIVE FRIENDSHIP DAY HIGHLIGHT STYLING --- */
+    .friendship-highlight {
+      background: linear-gradient(135deg, var(--soft-rose) 0%, var(--deep-rose) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      font-family: var(--font-serif);
+      display: inline-block;
+      filter: drop-shadow(0 2px 8px rgba(217, 119, 127, 0.15));
+    }
+
+    /* ===================================================
+       SLIDE 1: THE ENVELOPE / OPENING
+       =================================================== */
+    .slide-1-card {
+      gap: 16px;
+      cursor: pointer;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .slide-1-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 56px rgba(217, 119, 127, 0.16);
+    }
+
+    .sub-header-text {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--slate-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .headline-main {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 600;
+      background: linear-gradient(120deg, #2c3545 0%, #a84b53 50%, #2c3545 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.25;
+      margin-bottom: 8px;
+      animation: titleShimmer 7s linear infinite;
+    }
+
+    @keyframes titleShimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* Interactive Animated Envelope */
+    .envelope-wrapper {
+      position: relative;
+      width: 144px;
+      height: 112px;
+      margin: 20px 0 10px 0;
+      perspective: 800px;
+    }
+
+    .envelope-body {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ffffff 0%, #fdf5f6 100%);
+      border: 1px solid #f0d5d7;
+      border-radius: 14px;
+      box-shadow: 0 14px 30px rgba(217, 119, 127, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Envelope Pocket Lines */
+    .envelope-body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 72px solid #fcf2f4;
+      border-right: 72px solid #fcf2f4;
+      border-bottom: 56px solid #f9ecee;
+      border-top: 56px solid transparent;
+      z-index: 2;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 72px solid transparent;
+      border-right: 72px solid transparent;
+      border-top: 62px solid #f5dfe2;
+      transform-origin: top center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 3;
+    }
+
+    /* Wax Heart Seal */
+    .wax-seal {
+      position: absolute;
+      top: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--soft-rose) 0%, var(--deep-rose) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(168, 75, 83, 0.35);
+      z-index: 4;
+      animation: heartbeat 2.2s infinite ease-in-out;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.15); }
+    }
+
+    .letter-preview {
+      position: absolute;
+      width: 86%;
+      height: 70%;
+      bottom: 8px;
+      left: 7%;
+      background: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      z-index: 1;
+      transition: transform 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      gap: 4px;
+    }
+
+    .letter-line {
+      height: 3px;
+      background: var(--blush-pink-accent);
+      border-radius: 2px;
+    }
+    .letter-line.short { width: 50%; }
+
+    /* Open animation triggers on envelope card click */
+    .slide-1-card.opening .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .slide-1-card.opening .letter-preview {
+      transform: translateY(-28px);
+      z-index: 2;
+    }
+
+    .tap-prompt {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 9px 20px;
+      border-radius: 20px;
+      background: var(--blush-pink);
+      color: var(--soft-rose);
+      font-size: 0.82rem;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(217, 119, 127, 0.1);
+      animation: bouncePrompt 2s infinite ease-in-out;
+    }
+
+    @keyframes bouncePrompt {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    /* ===================================================
+       SLIDE 2: ACKNOWLEDGING THE TIME PASSED (LOOKING BACK)
+       =================================================== */
+    .slide-2-card {
+      text-align: left;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 40px 28px;
+    }
+
+    .slide-2-card .tag-badge {
+      margin-bottom: 6px;
+    }
+
+    .slide-2-headline {
+      font-family: var(--font-serif);
+      font-size: 1.95rem;
+      font-weight: 600;
+      color: var(--slate-dark);
+      margin-bottom: 4px;
+    }
+
+    .slide-2-body {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      line-height: 1.82;
+      color: var(--slate-dark);
+    }
+
+    /* ===================================================
+       SLIDE 3: THE CORE MESSAGE
+       =================================================== */
+    .message-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: left;
+    }
+
+    .message-paragraph {
+      font-family: var(--font-sans);
+      font-size: 1.01rem;
+      line-height: 1.76;
+      color: var(--slate-dark);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .message-paragraph.fadeIn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .message-divider {
+      width: 44px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--soft-rose) 0%, var(--blush-pink-accent) 100%);
+      margin: 2px 0;
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .message-divider.fadeIn {
+      opacity: 1;
+    }
+
+    /* ===================================================
+       SLIDE 4: STATEMENT QUOTE & QUIET CLOSING
+       =================================================== */
+    .quote-callout-box {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(249, 235, 234, 0.7) 100%);
+      border-left: 4px solid var(--soft-rose);
+      border-top: 1px solid var(--blush-pink-accent);
+      border-right: 1px solid var(--blush-pink-accent);
+      border-bottom: 1px solid var(--blush-pink-accent);
+      border-radius: 18px;
+      padding: 24px 20px;
+      margin: 8px 0 20px 0;
+      position: relative;
+      box-shadow: 0 12px 28px rgba(217, 119, 127, 0.07);
+      animation: quoteBoxGlow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes quoteBoxGlow {
+      0% {
+        box-shadow: 0 10px 24px rgba(217, 119, 127, 0.08);
+        border-left-color: var(--soft-rose);
+      }
+      100% {
+        box-shadow: 0 16px 36px rgba(217, 119, 127, 0.22);
+        border-left-color: var(--deep-rose);
+      }
+    }
+
+    .quote-mark {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      line-height: 0.5;
+      color: var(--soft-rose);
+      opacity: 0.5;
+      margin-bottom: 8px;
+    }
+
+    .quote-text {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      line-height: 1.68;
+      color: var(--slate-dark);
+      font-style: italic;
+    }
+
+    .closing-statement {
+      margin-top: 8px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .closing-line-1 {
+      font-family: var(--font-serif);
+      font-size: 1.12rem;
+      color: var(--slate-dark);
+      font-weight: 600;
+    }
+
+    .closing-line-2 {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--soft-rose);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .heart-icon {
+      display: inline-block;
+      animation: soft-pulse 1.8s infinite ease-in-out;
+    }
+
+    @keyframes soft-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.22); }
+    }
+
+    /* SLIDE 4 ACTION BUTTONS */
+    .slide-4-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hug-btn, .replay-btn {
+      padding: 9px 20px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(217, 119, 127, 0.1);
+    }
+
+    .hug-btn {
+      background: linear-gradient(135deg, var(--soft-rose) 0%, var(--deep-rose) 100%);
+      color: #ffffff;
+      border: none;
+    }
+
+    .hug-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(168, 75, 83, 0.25);
+    }
+
+    .replay-btn {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid var(--blush-pink-accent);
+      color: var(--slate-muted);
+    }
+
+    .replay-btn:hover {
+      background: var(--blush-pink);
+      color: var(--soft-rose);
+      border-color: var(--soft-rose);
+      transform: translateY(-1px);
+    }
+
+    /* ===================================================
+       ANIMATED POPUP MODAL STYLES
+       =================================================== */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(44, 53, 69, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-card {
+      width: 100%;
+      max-width: 360px;
+      background: linear-gradient(135deg, #ffffff 0%, var(--bg-cream) 100%);
+      border: 1px solid var(--blush-pink-accent);
+      border-radius: 28px;
+      padding: 32px 24px;
+      box-shadow: 0 24px 60px rgba(217, 119, 127, 0.22);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transform: scale(0.85) translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .popup-overlay.active .popup-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .popup-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--slate-dark);
+    }
+
+    .popup-body {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--slate-muted);
+    }
+
+    .modal-close-btn {
+      margin-top: 10px;
+      padding: 10px 24px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--soft-rose) 0%, var(--deep-rose) 100%);
+      color: #ffffff;
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(168, 75, 83, 0.25);
+      transition: all 0.25s ease;
+    }
+
+    .modal-close-btn:hover {
+      transform: scale(1.04);
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast-notification {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: rgba(44, 53, 69, 0.9);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      pointer-events: none;
+    }
+
+    .toast-notification.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Rich Ambient Floating Orbs & Background Canvas -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Animated Popup Modal -->
+  <div class="popup-overlay" id="popupModal">
+    <div class="popup-card">
+      <div class="tag-badge">🌟 A Sincere Wish</div>
+      <h3 class="popup-title">A Genuine Wish for You</h3>
+      <p class="popup-body">
+        I genuinely hope life is treating you well. That you're smiling more than you're stressed, that your days are kind to you, and that the people around you see how wonderful you are. You deserve all good things — always. 🌸
+      </p>
+      <button class="modal-close-btn" id="modalCloseBtn">
+        <span>Thank You 🌸</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification element -->
+  <div class="toast-notification" id="toast"></div>
+
+  <!-- Mobile Story Deck App Container -->
+  <div class="story-app" id="storyApp">
+    
+    <!-- Top Progress Bar & Header Controls -->
+    <div class="top-bar">
+      <div class="progress-container">
+        <div class="progress-segment"><div class="progress-fill" id="fill-0"></div></div>
+        <div class="progress-segment"><div class="progress-fill" id="fill-1"></div></div>
+        <div class="progress-segment"><div class="progress-fill" id="fill-2"></div></div>
+        <div class="progress-segment"><div class="progress-fill" id="fill-3"></div></div>
+      </div>
+
+      <div class="top-header-controls">
+        <div class="story-author-tag">
+          <div class="author-avatar">✨</div>
+          <span>Friendship Day Note</span>
+        </div>
+
+        <div class="header-actions">
+          <button class="theme-btn" id="themeBtn" aria-label="Toggle background theme">
+            <span>✨</span>
+            <span id="themeText">Theme</span>
+          </button>
+
+          <button class="music-btn" id="musicBtn" aria-label="Toggle ambient music">
+            <span class="music-icon" id="musicIcon">🎵</span>
+            <span id="musicText">Music</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Tap Zones for Story Navigation -->
+    <div class="tap-zone left" id="tapLeft" title="Previous Slide"></div>
+    <div class="tap-zone right" id="tapRight" title="Next Slide"></div>
+
+    <!-- Desktop Navigation Hint Arrows -->
+    <button class="nav-arrow left-arrow" id="arrowLeft" aria-label="Previous slide">‹</button>
+    <button class="nav-arrow right-arrow" id="arrowRight" aria-label="Next slide">›</button>
+
+    <!-- Slides Deck Container -->
+    <div class="slides-deck">
+
+      <!-- SLIDE 1: THE ENVELOPE / OPENING -->
+      <div class="slide active" id="slide-0">
+        <div class="glass-card slide-1-card" id="envelopeCard">
+          <div class="sub-header-text">
+            <span class="friendship-highlight">Happy Friendship Day</span> • Tap to open
+          </div>
+          
+          <h1 class="headline-main">A Little Note for You</h1>
+
+          <div class="envelope-wrapper">
+            <div class="envelope-body">
+              <div class="envelope-flap"></div>
+              <div class="wax-seal">🤍</div>
+              <div class="letter-preview">
+                <div class="letter-line"></div>
+                <div class="letter-line"></div>
+                <div class="letter-line short"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tap-prompt">
+            <span>Tap envelope to open</span>
+            <span style="font-size: 14px;">✉️</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: ACKNOWLEDGING THE TIME PASSED -->
+      <div class="slide" id="slide-1">
+        <div class="glass-card slide-2-card">
+          <div class="tag-badge">
+            <span>⏳</span> Time Passed
+          </div>
+
+          <h2 class="slide-2-headline">Looking Back</h2>
+
+          <p class="slide-2-body">
+            It's crazy to think about how much time has passed since Fest Day. Even though college life kept moving forward, I constantly catch myself missing the laughter and how effortless things used to be between us.
+          </p>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: THE CORE MESSAGE -->
+      <div class="slide" id="slide-2">
+        <div class="glass-card">
+          <div class="tag-badge">
+            <span>🤍</span> From the Heart
+          </div>
+
+          <div class="message-container">
+            <p class="message-paragraph" id="msg-p1">
+              Since we're not texting like we used to, I don't know about your day. I don't know what you're going through anymore. I miss the moment when you used to share everything about your life.
+            </p>
+
+            <div class="message-divider" id="msg-div"></div>
+
+            <p class="message-paragraph" id="msg-p2">
+              I hope you're doing well. Whenever you need me, I'll be right there for you. I wish you a happy life with or without me. I wish nothing but the best for you.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: STATEMENT QUOTE & CLOSING -->
+      <div class="slide" id="slide-3">
+        <div class="glass-card">
+          <div class="tag-badge">
+            <span>🕊️</span> Always
+          </div>
+
+          <!-- Rose Accent Quote Callout Box -->
+          <div class="quote-callout-box">
+            <div class="quote-mark">“</div>
+            <p class="quote-text">
+              If I ever called you—Friend, just know I didn't mean it casually. I meant: I trust you. I care about you. And if life ever turns you into a stranger, I'll still wish the best for you—always. 🧿💙
+            </p>
+          </div>
+
+          <!-- Quiet Closing -->
+          <div class="closing-statement">
+            <p class="closing-line-1">But in the end... I really miss you.</p>
+            <p class="closing-line-2">
+              <span class="friendship-highlight">Happy Friendship Day</span> 
+              <span class="heart-icon">🤍</span>
+            </p>
+          </div>
+
+          <div class="slide-4-actions">
+            <button class="hug-btn" id="hugBtn">
+              <span>🌟 Send a Wish</span>
+              <span>✨</span>
+            </button>
+
+            <button class="replay-btn" id="replayBtn">
+              <span>Replay Story</span>
+              <span>↺</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Ambient Audio Generator & Interactive Animations Script -->
+  <script>
+    /* ===================================================================
+       STATE & SLIDE MANAGEMENT
+       =================================================================== */
+    const TOTAL_SLIDES = 4;
+    let currentSlide = 0;
+
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const fills = Array.from(document.querySelectorAll('.progress-fill'));
+    const envelopeCard = document.getElementById('envelopeCard');
+    const replayBtn = document.getElementById('replayBtn');
+    const hugBtn = document.getElementById('hugBtn');
+    const popupModal = document.getElementById('popupModal');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const toast = document.getElementById('toast');
+
+    // Message Paragraphs for Slide 3 animation
+    const msgP1 = document.getElementById('msg-p1');
+    const msgDiv = document.getElementById('msg-div');
+    const msgP2 = document.getElementById('msg-p2');
+
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add('active');
+      setTimeout(() => toast.classList.remove('active'), 2400);
+    }
+
+    function updateSlides(index) {
+      if (index < 0) index = 0;
+      if (index >= TOTAL_SLIDES) index = TOTAL_SLIDES - 1;
+
+      currentSlide = index;
+
+      // Update slide active state
+      slides.forEach((slide, idx) => {
+        if (idx === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      // Update progress bar
+      fills.forEach((fill, idx) => {
+        if (idx <= currentSlide) {
+          fill.style.width = '100%';
+        } else {
+          fill.style.width = '0%';
+        }
+      });
+
+      // Trigger Slide 3 sequential fade-in
+      if (currentSlide === 2) {
+        msgP1.classList.remove('fadeIn');
+        msgDiv.classList.remove('fadeIn');
+        msgP2.classList.remove('fadeIn');
+
+        setTimeout(() => msgP1.classList.add('fadeIn'), 150);
+        setTimeout(() => msgDiv.classList.add('fadeIn'), 550);
+        setTimeout(() => msgP2.classList.add('fadeIn'), 850);
+      }
+
+      // Trigger Slide 4 Climax Celebration Particle Shower
+      if (currentSlide === 3) {
+        triggerHeartShower();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < TOTAL_SLIDES - 1) {
+        updateSlides(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        updateSlides(currentSlide - 1);
+      }
+    }
+
+    /* ===================================================================
+       MAGICAL INTERACTIVE TAP BURST PARTICLES
+       =================================================================== */
+    const tapEmojis = ['🤍', '💖', '✨', '🌸', '💫', '🕊️'];
+
+    function spawnTapBurst(x, y) {
+      const count = 5;
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.className = 'tap-particle';
+        el.textContent = tapEmojis[Math.floor(Math.random() * tapEmojis.length)];
+
+        const dx = (Math.random() - 0.5) * 70 + 'px';
+        const dy = (Math.random() - 0.5) * 30 + 'px';
+        const rot = (Math.random() - 0.5) * 45 + 'deg';
+
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+        el.style.setProperty('--dx', dx);
+        el.style.setProperty('--dy', dy);
+        el.style.setProperty('--rot', rot);
+
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1200);
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      spawnTapBurst(e.clientX, e.clientY);
+    });
+
+    /* ===================================================================
+       POPUP MODAL & HUG BUTTON INTERACTION
+       =================================================================== */
+    hugBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      popupModal.classList.add('active');
+      triggerHeartShower();
+    });
+
+    modalCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      popupModal.classList.remove('active');
+      showToast('Wish Sent 🌸 Hope she smiles today');
+      triggerHeartShower();
+    });
+
+    /* ===================================================================
+       BACKGROUND THEME SWITCHER (ROSE, SUNSET, LAVENDER)
+       =================================================================== */
+    const themeBtn = document.getElementById('themeBtn');
+    const themes = ['', 'theme-sunset', 'theme-lavender'];
+    const themeNames = ['Rose Blush', 'Golden Sunset', 'Lavender Dream'];
+    let themeIndex = 0;
+
+    themeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.body.classList.remove('theme-sunset', 'theme-lavender');
+      themeIndex = (themeIndex + 1) % themes.length;
+      if (themes[themeIndex]) {
+        document.body.classList.add(themes[themeIndex]);
+      }
+      showToast('Theme Changed: ' + themeNames[themeIndex] + ' ✨');
+    });
+
+    /* ===================================================================
+       INTERACTIVE EVENT LISTENERS
+       =================================================================== */
+
+    // Envelope Card Click (Slide 1) -> Opens envelope then goes to Slide 2
+    envelopeCard.addEventListener('click', (e) => {
+      envelopeCard.classList.add('opening');
+      setTimeout(() => {
+        nextSlide();
+        envelopeCard.classList.remove('opening');
+      }, 550);
+    });
+
+    // Replay Button (Slide 4)
+    replayBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateSlides(0);
+      showToast('Story Replayed ↺');
+    });
+
+    // Navigation Tap Zones & Arrow Controls
+    document.getElementById('tapLeft').addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevSlide();
+    });
+
+    document.getElementById('tapRight').addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextSlide();
+    });
+
+    document.getElementById('arrowLeft').addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevSlide();
+    });
+
+    document.getElementById('arrowRight').addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextSlide();
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      }
+    });
+
+    // Touch Swipe Gestures
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const storyApp = document.getElementById('storyApp');
+
+    storyApp.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      if (e.touches.length > 0) {
+        mousePos.x = e.touches[0].clientX;
+        mousePos.y = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    storyApp.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const diffX = touchEndX - touchStartX;
+      if (Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+
+    /* ===================================================================
+       AMBIENT AUDIO GENERATOR (WEB AUDIO SYNTHESIZER)
+       =================================================================== */
+    let audioCtx = null;
+    let isPlayingAudio = false;
+    let audioInterval = null;
+
+    const musicBtn = document.getElementById('musicBtn');
+    const musicIcon = document.getElementById('musicIcon');
+    const musicText = document.getElementById('musicText');
+
+    const chordProgression = [
+      [261.63, 329.63, 392.00, 493.88], // Cmaj7
+      [220.00, 261.63, 329.63, 392.00], // Am7
+      [174.61, 220.00, 261.63, 349.23], // Fmaj7
+      [196.00, 246.94, 293.66, 392.00]  // G6
+    ];
+
+    let chordStep = 0;
+
+    function playSoftNote(freq, delay = 0, duration = 3.5) {
+      if (!audioCtx || audioCtx.state !== 'running') return;
+
+      setTimeout(() => {
+        try {
+          const osc = audioCtx.createOscillator();
+          const gainNode = audioCtx.createGain();
+          const filter = audioCtx.createBiquadFilter();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(800, audioCtx.currentTime);
+
+          const now = audioCtx.currentTime;
+          gainNode.gain.setValueAtTime(0.001, now);
+          gainNode.gain.exponentialRampToValueAtTime(0.08, now + 0.4);
+          gainNode.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+          osc.connect(filter);
+          filter.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+
+          osc.start(now);
+          osc.stop(now + duration);
+        } catch (e) {
+          console.log("Audio play error", e);
+        }
+      }, delay * 1000);
+    }
+
+    function playChordCycle() {
+      const chord = chordProgression[chordStep % chordProgression.length];
+      chordStep++;
+
+      chord.forEach((freq, idx) => {
+        playSoftNote(freq, idx * 0.22, 4.0);
+      });
+    }
+
+    function toggleMusic() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      if (!isPlayingAudio) {
+        isPlayingAudio = true;
+        musicBtn.classList.add('playing');
+        musicIcon.textContent = '⏸️';
+        musicText.textContent = 'Music';
+        showToast('🎵 Ambient Music Playing...');
+        
+        playChordCycle();
+        audioInterval = setInterval(playChordCycle, 4200);
+      } else {
+        isPlayingAudio = false;
+        musicBtn.classList.remove('playing');
+        musicIcon.textContent = '🎵';
+        musicText.textContent = 'Music';
+        showToast('⏸️ Music Paused');
+
+        if (audioInterval) {
+          clearInterval(audioInterval);
+          audioInterval = null;
+        }
+      }
+    }
+
+    musicBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMusic();
+    });
+
+    document.body.addEventListener('click', () => {
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }, { once: true });
+
+    /* ===================================================================
+       ENHANCED DYNAMIC CANVAS PARTICLES & MOUSE ATTRACTION
+       =================================================================== */
+    const canvas = document.getElementById('ambient-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    let mousePos = { x: width / 2, y: height / 2 };
+
+    window.addEventListener('mousemove', (e) => {
+      mousePos.x = e.clientX;
+      mousePos.y = e.clientY;
+    });
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const NUM_PARTICLES = 36;
+
+    class AmbientParticle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.radius = Math.random() * 9 + 3;
+        this.alpha = Math.random() * 0.32 + 0.08;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = -Math.random() * 0.5 - 0.15;
+        this.color = Math.random() > 0.4 ? '248, 235, 233' : (Math.random() > 0.5 ? '217, 119, 127' : '244, 211, 214');
+        this.rotation = Math.random() * Math.PI * 2;
+        this.vRot = (Math.random() - 0.5) * 0.025;
+      }
+
+      update() {
+        const dx = mousePos.x - this.x;
+        const dy = mousePos.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 180) {
+          this.x += (dx / dist) * 0.4;
+          this.y += (dy / dist) * 0.4;
+        }
+
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rotation += this.vRot;
+
+        if (this.y < -30 || this.x < -30 || this.x > width + 30) {
+          this.reset();
+          this.y = height + 20;
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.beginPath();
+        ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+        ctx.shadowBlur = 16;
+        ctx.shadowColor = `rgba(${this.color}, ${this.alpha * 0.8})`;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < NUM_PARTICLES; i++) {
+      particles.push(new AmbientParticle());
+    }
+
+    function triggerHeartShower() {
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          spawnTapBurst(
+            Math.random() * (window.innerWidth * 0.6) + window.innerWidth * 0.2,
+            Math.random() * (window.innerHeight * 0.5) + window.innerHeight * 0.25
+          );
+        }, i * 180);
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+
+    // Initialize slide 0 on load
+    updateSlides(0);
+
+  </script>
+</body>
+</html>
